@@ -1,0 +1,17 @@
+{
+  "name": "@liquid-labs/catalyst-resource-jest",
+  "version": "1.0.0-alpha.0",
+  "description": "",
+  "main": "dist/catalyst-resource-jest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Zane Rockenbaugh <zane@liquid-labs.com>",
+  "license": "UNLICENSED",
+  "repository": "git+ssh://git@github.com/liquid-labs/catalyst-resource-jest.git",
+  "bugs": {
+    "url": "https://github.com/liquid-labs/catalyst-resource-jest/issues"
+  },
+  "homepage": "https://github.com/liquid-labs/catalyst-resource-jest#readme"
+}
