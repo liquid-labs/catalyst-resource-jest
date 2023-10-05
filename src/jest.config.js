@@ -40,7 +40,8 @@ const config = {
     '/test-data/',
     '<rootDir>/test-staging/',
     '<rootDir>/dist/',
-    '<rootDir>/qa/'
+    '<rootDir>/qa/',
+    '<rootDir>/coverage/'
   ],
 
   // A list of reporter names that Jest uses when writing coverage reports
