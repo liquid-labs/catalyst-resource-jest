@@ -32,7 +32,7 @@ $(TEST_REPORT) $(TEST_PASS_MARKER) &: package.json $(ALL_JS_FILES_SRC)
 		--config $(SRC)/jest.config.js \
 		| tee -a $(TEST_REPORT); \
 		touch $(TEST_PASS_MARKER) )
-	[[ -f coverage/coverage-final.json ]] \
+	[[ -f qa/coverage/coverage-final.json ]] \
 		|| echo 'FAILED to create coverage results' >&2
 
 ESLINT:=npx eslint

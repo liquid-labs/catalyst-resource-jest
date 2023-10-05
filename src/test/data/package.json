@@ -1,0 +1,7 @@
+{
+  "catalyst": {
+    "jestConfig": {
+      "collectCoverage": false
+    }
+  }
+}
