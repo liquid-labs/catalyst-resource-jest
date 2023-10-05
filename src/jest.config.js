@@ -27,19 +27,20 @@ const config = {
   collectCoverage : true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom : ['**/*.js'],
+  collectCoverageFrom : ['**/*.{js,cjs,mjs,jsx}', '!**/index.{js,mjs,cjs}', '!**/.*.{js,mjs,cjs}'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory : 'coverage',
+  coverageDirectory : 'qa/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns : [
     '/node_modules/',
-    '/testlib/',
-    '/\\.test\\.[mc]?js/',
+    '/test/',
+    '\\.test\\.[mc]?js',
     '/test-data/',
-    '/test-staging\\/coverage/',
-    '/test-staging\\/qa/'
+    '<rootDir>/test-staging/',
+    '<rootDir>/dist/',
+    '<rootDir>/qa/'
   ],
 
   // A list of reporter names that Jest uses when writing coverage reports
