@@ -30,7 +30,7 @@ const config = {
   collectCoverageFrom : ['**/*.{js,cjs,mjs,jsx}', '!**/index.{js,mjs,cjs}', '!**/.*.{js,mjs,cjs}'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory : 'qa/coverage',
+  coverageDirectory : 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns : [
