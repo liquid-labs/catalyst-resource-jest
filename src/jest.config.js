@@ -30,7 +30,7 @@ const config = {
   collectCoverageFrom : ['**/*.{js,cjs,mjs,jsx}', '!**/index.{js,mjs,cjs}', '!**/.*.{js,mjs,cjs}'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory : 'qa/coverage',
+  coverageDirectory : 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns : [
@@ -40,7 +40,8 @@ const config = {
     '/test-data/',
     '<rootDir>/test-staging/',
     '<rootDir>/dist/',
-    '<rootDir>/qa/'
+    '<rootDir>/qa/',
+    '<rootDir>/coverage/'
   ],
 
   // A list of reporter names that Jest uses when writing coverage reports
