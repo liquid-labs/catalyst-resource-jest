@@ -200,7 +200,13 @@ const config = {
 }
 
 if (pkg.catalyst) {
-  Object.assign(config, pkg.catalyst.jestConfig)
+  const { jestConfig, jestCoverageGlobs } = pkg.catalyst
+
+  Object.assign(config, jestConfig)
+  if (jestCoverageGlobs !== undefined) {
+    // config.coveragePathIgnorePatterns.push(...pkg.catalyst.jestCoverageIgnorePatterns)
+    config.collectCoverageFrom.push(...jestCoverageGlobs)
+  }
 }
 
 module.exports = config
