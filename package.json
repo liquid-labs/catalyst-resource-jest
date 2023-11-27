@@ -1,8 +1,8 @@
 {
-  "name": "@liquid-labs/catalyst-resource-jest",
+  "name": "@liquid-labs/sdlc-resource-jest",
   "version": "1.0.0-alpha.4",
   "description": "",
-  "main": "dist/catalyst-resource-jest.js",
+  "main": "dist/sdlc-resource-jest.js",
   "files": [
     "dist/"
   ],
@@ -21,11 +21,14 @@
   "keywords": [],
   "author": "Zane Rockenbaugh <zane@liquid-labs.com>",
   "license": "UNLICENSED",
-  "repository": "git+ssh://git@github.com/liquid-labs/catalyst-resource-jest.git",
-  "bugs": {
-    "url": "https://github.com/liquid-labs/catalyst-resource-jest/issues"
+  "repository": {
+    "url": "git+ssh://git@github.com/liquid-labs/sdlc-resource-jest.git",
+    "type": "git"
   },
-  "homepage": "https://github.com/liquid-labs/catalyst-resource-jest#readme",
+  "bugs": {
+    "url": "https://github.com/liquid-labs/sdlc-resource-jest/issues"
+  },
+  "homepage": "https://github.com/liquid-labs/sdlc-resource-jest#readme",
   "dependencies": {
     "jest": "^29.7.0"
   },
