@@ -199,12 +199,11 @@ const config = {
   // watchman: true,
 }
 
-if (pkg.catalyst) {
-  const { jestConfig, jestCoverageGlobs } = pkg.catalyst
+if (pkg._sdlc) {
+  const { jestConfig, jestCoverageGlobs } = pkg._sdlc
 
   Object.assign(config, jestConfig)
   if (jestCoverageGlobs !== undefined) {
-    // config.coveragePathIgnorePatterns.push(...pkg.catalyst.jestCoverageIgnorePatterns)
     config.collectCoverageFrom.push(...jestCoverageGlobs)
   }
 }
