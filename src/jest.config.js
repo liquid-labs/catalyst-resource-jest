@@ -5,14 +5,14 @@ const readFileSync = require('node:fs').readFileSync
 
 let pkg
 if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true') {
-  // we expect to execute from the 'test-staging' subdir, so we drop down one; otherwise, we look for 
+  // we expect to execute from the 'test-staging' subdir, so we drop down one; otherwise, we look for
   // SRJ_CWD_PACKAGE_DIR to tell us where to look
   const packagePath = process.env.SRJ_CWD_REL_PACKAGE_DIR === undefined
     ? fsPath.resolve(process.cwd, '..', 'package.json')
     : fsPath.resolve(process.env.SRJ_CWD_REL_PACKAGE_DIR, 'package.json')
 
   try {
-    const packageContents = readFileSync(packagePath, { encoding: 'utf8' })
+    const packageContents = readFileSync(packagePath, { encoding : 'utf8' })
     try {
       pkg = JSON.parse(packageContents)
     }
@@ -25,12 +25,11 @@ if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true') {
   }
   catch (e) {
     if (e.code === 'ENOENT') {
-      throw new error(`"Could not locate '${packagePath}' to load package-level configuration customizations. By default, we look one direcotry belowe the current working directory (default is to run from './test-staging/'). Consider setting environment var 'SRJ_CWD_REL_PACKAGE_DIR' to set the directory of the package relative to the test process working dir (usually the package root directory; so set to '.' if 'package.json' is in the package root) or set 'SRJ_SKIP_PACKAGE_CUSTOMIZATIONS' to (the string) 'true' to skip loading package customizations altogether.`)
+      throw new Error(`"Could not locate '${packagePath}' to load package-level configuration customizations. By default, we look one direcotry belowe the current working directory (default is to run from './test-staging/'). Consider setting environment var 'SRJ_CWD_REL_PACKAGE_DIR' to set the directory of the package relative to the test process working dir (usually the package root directory; so set to '.' if 'package.json' is in the package root) or set 'SRJ_SKIP_PACKAGE_CUSTOMIZATIONS' to (the string) 'true' to skip loading package customizations altogether.`)
     }
     else { throw e }
   }
 } // if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true')
-
 
 const config = {
   // All imported modules in your tests should be mocked automatically
