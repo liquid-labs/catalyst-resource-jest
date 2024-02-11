@@ -208,4 +208,8 @@ if (pkg._sdlc) {
   }
 }
 
+if (config.testEnvironment === 'jsdom') {
+  config.testEnvironment = fsPath.join(__dirname, 'fix-jsdom-environment.js')
+}
+
 module.exports = config
