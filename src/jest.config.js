@@ -1,11 +1,36 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 const fsPath = require('node:path')
-// we expect to execute from the 'test-staging' subdir, so we drop down one; unless we're testing ourselves in which
-// case we don't.
-const pkg = process.env.SELF_TEST === 'true'
-  ? require(fsPath.join(process.cwd(), 'package.json'))
-  : require(fsPath.join(process.cwd(), '..', 'package.json'))
+const readFileSync = require('node:fs').readFileSync
+
+let pkg
+if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true') {
+  // we expect to execute from the 'test-staging' subdir, so we drop down one; otherwise, we look for 
+  // SRJ_CWD_PACKAGE_DIR to tell us where to look
+  const packagePath = process.env.SRJ_CWD_REL_PACKAGE_DIR === undefined
+    ? fsPath.resolve(process.cwd, '..', 'package.json')
+    : fsPath.resolve(process.env.SRJ_CWD_REL_PACKAGE_DIR, 'package.json')
+
+  try {
+    const packageContents = readFileSync(packagePath, { encoding: 'utf8' })
+    try {
+      pkg = JSON.parse(packageContents)
+    }
+    catch (e) {
+      if (e instanceof SyntaxError) {
+        throw new SyntaxError(e.message + ` (file: ${packagePath})`)
+      }
+      else { throw e }
+    }
+  }
+  catch (e) {
+    if (e.code === 'ENOENT') {
+      throw new error(`"Could not locate '${packagePath}' to load package-level configuration customizations. By default, we look one direcotry belowe the current working directory (default is to run from './test-staging/'). Consider setting environment var 'SRJ_CWD_REL_PACKAGE_DIR' to set the directory of the package relative to the test process working dir (usually the package root directory; so set to '.' if 'package.json' is in the package root) or set 'SRJ_SKIP_PACKAGE_CUSTOMIZATIONS' to (the string) 'true' to skip loading package customizations altogether.`)
+    }
+    else { throw e }
+  }
+} // if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true')
+
 
 const config = {
   // All imported modules in your tests should be mocked automatically
@@ -27,7 +52,7 @@ const config = {
   collectCoverage : true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom : ['**/*.{js,cjs,mjs,jsx}', '!**/index.{js,mjs,cjs}', '!**/.*.{js,mjs,cjs}'],
+  collectCoverageFrom : ['**/*.{js,cjs,mjs,jsx}'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory : 'coverage',
@@ -35,8 +60,10 @@ const config = {
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns : [
     '/node_modules/',
+    '/index.[mc]?jsx?',
     '/test/',
-    '\\.test\\.[mc]?js',
+    '/_tests_/',
+    '\\.test\\.[^.]+\\.[mc]?jsx?',
     '/test-data/',
     '<rootDir>/test-staging/',
     '<rootDir>/dist/',
@@ -199,7 +226,7 @@ const config = {
   // watchman: true,
 }
 
-if (pkg._sdlc) {
+if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true' && pkg._sdlc) {
   const { jestConfig, jestCoverageGlobs } = pkg._sdlc
 
   Object.assign(config, jestConfig)
