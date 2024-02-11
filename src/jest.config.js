@@ -8,7 +8,7 @@ if (process.env.SRJ_SKIP_PACKAGE_CUSTOMIZATIONS !== 'true') {
   // we expect to execute from the 'test-staging' subdir, so we drop down one; otherwise, we look for
   // SRJ_CWD_PACKAGE_DIR to tell us where to look
   const packagePath = process.env.SRJ_CWD_REL_PACKAGE_DIR === undefined
-    ? fsPath.resolve(process.cwd, '..', 'package.json')
+    ? fsPath.resolve(process.cwd(), '..', 'package.json')
     : fsPath.resolve(process.env.SRJ_CWD_REL_PACKAGE_DIR, 'package.json')
 
   try {
