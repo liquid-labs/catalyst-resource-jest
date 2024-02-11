@@ -27,7 +27,7 @@ $(TEST_REPORT) $(TEST_PASS_MARKER) &: package.json $(ALL_JS_FILES_SRC)
 	echo -n 'Test git rev: ' > $(TEST_REPORT)
 	git rev-parse HEAD >> $(TEST_REPORT)
 	( set -e; set -o pipefail; \
-		SELF_TEST=true \
+		SRJ_CWD_REL_PACKAGE_DIR='.' \
 		$(JEST) \
 		--config $(SRC)/jest.config.js \
 		| tee -a $(TEST_REPORT); \
